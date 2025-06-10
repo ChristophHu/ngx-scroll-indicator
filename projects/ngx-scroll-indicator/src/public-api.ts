@@ -1,0 +1,6 @@
+/*
+ * Public API Surface of ngx-scroll-indicator
+ */
+
+export * from './lib/ngx-scroll-indicator.service';
+export * from './lib/ngx-scroll-indicator.component';
