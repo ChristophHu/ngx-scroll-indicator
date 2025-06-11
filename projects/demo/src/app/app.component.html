@@ -1,13 +1,19 @@
 <div class="fixed inset-0 z-40">
-  <div class="scroll-indicator"></div>
+  <span>{{!(scrollToTop$ | async)}}</span>
+  @if (scrollIndicator$ | async) {
+    <div class="scroll-indicator"></div>
+  } 
+  @else {
+    <h2>Goodbye</h2>
+  }
 </div>
 
 <div class="absolute inset-0 z-10">
   <div class="relative container mx-auto">
     <div class="h-96 bg-gray-100 text-white" sectionName="first" id="1"></div>
     <div class="h-96" #section id="2"></div>
-    <div class="h-96 bg-gray-100 text-white" #section id="3"></div>
+    <!-- <div class="h-96 bg-gray-100 text-white" #section id="3"></div>
     <div class="h-96" #section id="4"></div>
-    <div class="h-96 bg-gray-100 text-white" #section id="5"></div>
+    <div class="h-96 bg-gray-100 text-white" #section id="5"></div> -->
   </div>
 </div>
