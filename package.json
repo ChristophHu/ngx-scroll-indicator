@@ -19,6 +19,7 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@christophhu/ngx-github-pages-demo": "^19.2.8",
     "@tailwindcss/postcss": "^4.1.8",
     "angular-cli-ghpages": "^2.0.3",
     "postcss": "^8.5.4",

@@ -91,14 +91,14 @@
               }
             ],
             "styles": [
-              "projects/demo/src/styles.sass"
+              "projects/demo/src/styles.sass",
+              "node_modules/@christophhu/ngx-github-pages-demo/lib/default.css"
             ],
             "scripts": []
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy",
-          "dir": "dist/demo/browser"
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     },

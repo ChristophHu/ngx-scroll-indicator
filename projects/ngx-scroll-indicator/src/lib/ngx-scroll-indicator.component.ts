@@ -1,5 +1,5 @@
 import { AsyncPipe, ViewportScroller } from '@angular/common';
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, ElementRef, Host, HostListener, Input } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
@@ -23,7 +23,7 @@ export class NgxScrollIndicatorComponent {
 
   documentHeight: number = 0
 
-  constructor(private readonly _viewportScroller: ViewportScroller) { }
+  constructor(private readonly _viewportScroller: ViewportScroller, private el: ElementRef) { }
   
   ngOnInit(): void {
     this.documentHeight = document.documentElement.scrollHeight
@@ -32,10 +32,32 @@ export class NgxScrollIndicatorComponent {
     console.log('windowheight', window.innerHeight)
     console.log('scrollposition', this._viewportScroller.getScrollPosition()[1])
     console.log('document', document.documentElement.scrollHeight)
+
+    // can you get the parent component of this element?
+    const element = this.el.nativeElement.offsetParent; // scrollHeight, scrollTop
+    console.log(this.el)
+    // how to check the scrolling with an observable?
+
+
+
+    console.log('windowheight', element.offsetHeight)
+    console.log('scrollposition', element.scrollTop)
+    console.log('document', element.scrollHeight)
   }
+
+  // how to get the scroll position of the parent component?
+  @HostListener('scroll', ['$event']) onScroll(event: any) {
+    console.log('windowheight', window.innerHeight)
+  }
+
+
 
   @HostListener('window:scroll', ['$event']) onWindowScroll(event: any) {
     this._scrollToTop.next(this.isToTopActive())
+    const element = this.el.nativeElement.offsetParent; // scrollHeight, scrollTop
+    console.log('windowheight', element.offsetHeight)
+    console.log('scrollposition', element.scrollTop)
+    console.log('document', element.scrollHeight)
   }
   @HostListener('window:resize', ['$event']) onWindowResize(event: any) {
     this._scrollIndicator.next(this.getViewEnd() < this.documentHeight)
