@@ -1,12 +1,34 @@
 {
-  "name": "ngx-scroll-indicator",
-  "version": "0.0.1",
+  "name": "@christophhu/ngx-scroll-indicator",
+  "version": "19.2.0",
+  "description": "Library for Angular to add a scrolling-indicator.",
+  "license": "MIT",
+  "author": {
+    "name": "Christoph Huschenhoefer",
+    "email": "christoph@nxt.codes"
+  },
+  "keywords": [
+    "angular",
+    "scrolling",
+    "indicator"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christophhu/ngx-scroll-indicator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/christophhu/ngx-scroll-indicator/issues"
+  },
+  "homepage": "https://github.com/christophhu/ngx-scroll-indicator#readme",
   "peerDependencies": {
     "@angular/common": "^19.2.0",
     "@angular/core": "^19.2.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
-  },
-  "sideEffects": false
+  }
 }

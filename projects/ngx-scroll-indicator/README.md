@@ -1,63 +1,42 @@
-# NgxScrollIndicator
+# Ngx-Scroll-Indicator
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+## Frameworks and Languages
+<p align="left">
+  <img alt="Static Badge" src="https://img.shields.io/badge/19.2.0-000000?style=for-the-badge&logo=angular&logoColor=white&label=Angular&labelColor=000000"><br>
+  <img alt="Static Badge" src="https://img.shields.io/badge/4.1.8-000000?style=for-the-badge&logo=tailwindcss&logoColor=white&label=Tailwind&labelColor=06B6D4&color=000000"><br>
+  <img alt="Static Badge" src="https://img.shields.io/badge/5.7.2-000000?style=for-the-badge&logo=typescript&logoColor=white&label=Typescript&labelColor=007ACC&color=000000">
+</p>
 
-## Code scaffolding
+## Demo
+<p align="center">
+  <a href="https://christophhu.github.io/ngx-scroll-indicator"><img src="https://github.com/ChristophHu/ChristophHu/blob/main/assets/gif/ngx-scroll-indicator.gif" width="500" alt="image" /></a>
+</p>
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Description
+This Repository contains a simple Angular library to display a scroll indicator at the bottom of the page. The user can scroll to the top of the page by clicking on the indicator. The indicator is displayed the hole time as an animation, that the user cann scroll down. At the bottom of the page, the indicator is displayed as a button to scroll to the top.
+The library is easy to use and can be installed via [npm](https://www.npmjs.com/package/@christophhu/ngx-scroll-indicator).
 
+## Installation
 ```bash
-ng generate component component-name
+npm i @christophhu/ngx-scroll-indicator
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
+## Use
+### With default toggle
+```html
+<ngx-scroll-indicator [distanceToTop]="500"></ngx-scroll-indicator>
 ```
 
-## Building
+```typescript
+import { NgxScrollIndicatorComponent } from "@christophhu/ngx-scroll-indicator";
 
-To build the library, run:
-
-```bash
-ng build ngx-scroll-indicator
+@Component({
+  ...
+  imports: [
+    NgxScrollIndicatorComponent
+  ]
+})
+export class TestComponent {
+  constructor() {}
+}
 ```
-
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
-
-### Publishing the Library
-
-Once the project is built, you can publish your library by following these steps:
-
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/ngx-scroll-indicator
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
