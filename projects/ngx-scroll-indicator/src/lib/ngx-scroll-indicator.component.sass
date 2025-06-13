@@ -1,0 +1,73 @@
+// scroll-indicator
+$size: 3rem
+$color: #404040
+
+.scroll-indicator-wrapper
+    position: fixed
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 999
+
+    .scroll-indicator
+        position: absolute
+        bottom: .5rem
+        left: calc(50% - #{$size * .6} / 2)
+        height: 3rem
+        width: calc($size * .6)
+        border-radius: ($size * .3)
+        border: 2px solid $color
+        z-index: 999
+
+        &:before
+            content: ''
+            position: absolute
+            left: calc(50% - #{$size} / 20)
+            top: calc($size/5)
+            height: .3rem
+            width: .3rem
+            background: $color
+            border-radius: 50%
+            animation: scroll 3s infinite
+
+    @keyframes scroll
+        0%
+            opacity: 0
+            transform: translateY(.6rem)       
+        40%
+            opacity: 1
+        80%
+            transform: translateY(0)
+        100%
+            opacity: 0
+
+    @keyframes scroll-invert
+        0%
+            opacity: 0
+        20%
+            opacity: 1
+            transform: translateY(0)
+        40%
+            opacity: 1
+        100%
+            opacity: 0
+            transform: translateY(.6rem)
+
+    .scroll-top-indicator
+        position: absolute
+        bottom: .5rem
+        left: calc(50% - #{$size * .6} / 2)
+        height: 3rem
+        width: calc($size * .6)
+        border-radius: ($size * .3)
+        border: 2px solid $color
+        z-index: 999
+        cursor: pointer
+
+        svg
+            position: absolute
+            top: calc($size/5)
+            height: 1.5rem
+            width: 1.5rem
+            stroke: $color
+            stroke-width: .1rem
