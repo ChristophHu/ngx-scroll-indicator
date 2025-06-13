@@ -3,24 +3,15 @@
   <span>{{(scrollToTop$ | async)}}</span>
   @switch (true) {
     @case ((scrollIndicator$ | async) && (scrollToTop$ | async)) {
-      <div class="scroll-top-indicator cursor-pointer" (click)="scrollToTop()">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><style>
-    path {
-      opacity: 1;
-      animation: 5.5s opacity;
-    }
-    @keyframes opacity {
-      0% {opacity: 0} 
-      100% {opacity: 1}
-    }
-  </style><path d="M4 4l16 0" /><path class="arrow" d="M12 10l0 10" /><path class="arrow" d="M12 10l4 4" /><path class="arrow" d="M12 10l-4 4" /></svg>
+      <div class="scroll-top-indicator cursor-pointer" (click)="scrollToTop('1')">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><style> path { opacity: 1; } .bounce { opacity: 1; animation: 2s bounce infinite; animation-delay: 1s, 1s; transform-origin: center; transform: translateY(0); } @keyframes bounce { 0% { transform: translateY(0) } 50% { transform: translateY(-5px) } 100% { transform: translateY(0) } }</style><path d="M4 4l16 0" /><path class="bounce" d="M12 10l0 10" /><path class="bounce" d="M12 10l4 4" /><path class="bounce" d="M12 10l-4 4" /><animate attributeName="opacity" dur="1s" keyTimes="0;1" values="0;1"/></svg>
       </div>
     }
     @case (scrollIndicator$ | async) {
       <div class="scroll-indicator"></div>
     }
     @default {
-      <!-- <div class="scroll-top-indicator"></div> -->
+      
     }
   }
 </div>
@@ -29,8 +20,8 @@
   <div class="relative container mx-auto">
     <div class="h-96 bg-gray-100 text-white" sectionName="first" id="1"></div>
     <div class="h-96" #section id="2"></div>
-    <!-- <div class="h-96 bg-gray-100 text-white" #section id="3"></div>
+    <div class="h-96 bg-gray-100 text-white" #section id="3"></div>
     <div class="h-96" #section id="4"></div>
-    <div class="h-96 bg-gray-100 text-white" #section id="5"></div> -->
+    <div class="h-96 bg-gray-100 text-white" #section id="5"></div>
   </div>
 </div>
