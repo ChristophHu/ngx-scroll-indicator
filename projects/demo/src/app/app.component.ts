@@ -36,17 +36,17 @@ export class AppComponent implements OnInit {
   constructor(private readonly _viewportScroller: ViewportScroller, public el: ElementRef<HTMLElement>) { }
   
   ngOnInit(): void {
-    console.log('windowheight', window.innerHeight)
-    console.log('scrollposition', this._viewportScroller.getScrollPosition()[1])
-    console.log('document', document.documentElement.scrollHeight)
+    // console.log('windowheight', window.innerHeight)
+    // console.log('scrollposition', this._viewportScroller.getScrollPosition()[1])
+    // console.log('document', document.documentElement.scrollHeight)
     this._scrollIndicator.next(this._viewportScroller.getScrollPosition()[1] + window.innerHeight < document.documentElement.scrollHeight)
-    this._scrollToTop.next(this._viewportScroller.getScrollPosition()[1] + window.innerHeight < document.documentElement.scrollHeight)
-    this.scrollIndicator$.subscribe((visible: boolean) => {
-      console.log('Scroll indicator visibility:', visible)
-    })
-    this.scrollToTop$.subscribe((visible: boolean) => {
-      console.log('Scroll to top:', visible)
-    })
+    this._scrollToTop.next(this._viewportScroller.getScrollPosition()[1] + window.innerHeight >= document.documentElement.scrollHeight)
+    // this.scrollIndicator$.subscribe((visible: boolean) => {
+    //   console.log('Scroll indicator visibility:', visible)
+    // })
+    // this.scrollToTop$.subscribe((visible: boolean) => {
+    //   console.log('Scroll to top:', visible)
+    // })
   }
 
   @HostListener('window:scroll', ['$event']) onWindowScroll(event: any) {
@@ -54,13 +54,16 @@ export class AppComponent implements OnInit {
     // this._sectionsAhead = this._sections.value.filter(page => page.offsetTop >= currentScrollPosition)
     // this._currentSection = this._sectionsAhead[0]
     // this._sections.value.forEach(page => page.activated = page.fragment === this._currentSection.fragment)
-    console.log(this._viewportScroller.getScrollPosition()[1] + window.innerHeight < document.documentElement.scrollHeight)
+    this._scrollToTop.next(this._viewportScroller.getScrollPosition()[1] + window.innerHeight >= document.documentElement.scrollHeight)
+
   }
-  // add a hostlistener for window resize to detect if the scroll indicator is visible
   @HostListener('window:resize', ['$event']) onWindowResize(event: any) {
-    console.log('windowheight', window.innerHeight)
-    console.log('scrollposition', this._viewportScroller.getScrollPosition()[1])
-    console.log('document', document.documentElement.scrollHeight)
     this._scrollIndicator.next(this._viewportScroller.getScrollPosition()[1] + window.innerHeight < document.documentElement.scrollHeight)
+    this._scrollToTop.next(this._viewportScroller.getScrollPosition()[1] + window.innerHeight >= document.documentElement.scrollHeight)
+  }
+
+  scrollToTop(): void {
+    this._viewportScroller.scrollToPosition([0, 0])
+    this._scrollToTop.next(false)
   }
 }

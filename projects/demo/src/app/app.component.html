@@ -1,10 +1,27 @@
 <div class="fixed inset-0 z-40">
-  <span>{{!(scrollToTop$ | async)}}</span>
-  @if (scrollIndicator$ | async) {
-    <div class="scroll-indicator"></div>
-  } 
-  @else {
-    <h2>Goodbye</h2>
+  <span>{{(scrollIndicator$ | async)}}</span>
+  <span>{{(scrollToTop$ | async)}}</span>
+  @switch (true) {
+    @case ((scrollIndicator$ | async) && (scrollToTop$ | async)) {
+      <div class="scroll-top-indicator cursor-pointer" (click)="scrollToTop()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><style>
+    path {
+      opacity: 1;
+      animation: 5.5s opacity;
+    }
+    @keyframes opacity {
+      0% {opacity: 0} 
+      100% {opacity: 1}
+    }
+  </style><path d="M4 4l16 0" /><path class="arrow" d="M12 10l0 10" /><path class="arrow" d="M12 10l4 4" /><path class="arrow" d="M12 10l-4 4" /></svg>
+      </div>
+    }
+    @case (scrollIndicator$ | async) {
+      <div class="scroll-indicator"></div>
+    }
+    @default {
+      <!-- <div class="scroll-top-indicator"></div> -->
+    }
   }
 </div>
 

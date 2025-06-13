@@ -8,7 +8,7 @@ $color: #404040
     left: calc(50% - #{$size * .6} / 2)
     height: 3rem
     width: calc($size * .6)
-    border-radius: $size
+    border-radius: ($size * .3)
     border: 2px solid $color
 
     &:before
@@ -44,3 +44,23 @@ $color: #404040
     100%
         opacity: 0
         transform: translateY(.6rem)
+
+.scroll-top-indicator
+    position: absolute
+    bottom: .5rem
+    left: calc(50% - #{$size * .6} / 2)
+    height: 3rem
+    width: calc($size * .6)
+    border-radius: ($size * .3)
+    border: 2px solid $color
+
+    svg
+        position: absolute
+        top: calc($size/5)
+        height: 1.5rem
+        width: 1.5rem
+        stroke: $color
+        stroke-width: .1rem
+
+        // add an animation to show the arrow once without bouncing and infinitie
+        animation: ease-in-out 1s
