@@ -1,8 +1,8 @@
 import { AsyncPipe, ViewportScroller } from '@angular/common';
-import { Component, ElementRef, Host, HostListener, Input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Host, HostListener, Input } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-interface IScrollableElement {
+interface IScrollWrapper {
   height: number
   scrollHeight: number
   scrollPosition: number
@@ -17,7 +17,7 @@ interface IScrollableElement {
   templateUrl: './ngx-scroll-indicator.component.html',
   styleUrls: ['./ngx-scroll-indicator.component.sass']
 })
-export class NgxScrollIndicatorComponent {
+export class NgxScrollIndicatorComponent implements AfterViewInit {
   @Input() scrollableContent: HTMLElement | any
   @Input() distanceToTop: number = 0
   @Input() distanceToBottom: number = 0
@@ -39,17 +39,38 @@ export class NgxScrollIndicatorComponent {
   private parentElement: any
 
   @HostListener("window:resize", []) public onResize() {
-    // this.checkScrollableContent()
     console.log('window resized')
   }
 
-  @HostListener('window:scroll', []) scroll() {
-    console.log('window scrolled')
-    // if ((this.scrollableContent.scrollHeight - (this.scrollableContent.scrollTop + this.scrollableContent.offsetHeight)) <= 0) this.isScrollAtBottom = true
-    // if (this.scrollableContent.scrollTop <= 0) this.isScrollAtBottom = false
+  // @HostListener('window:scroll', []) scroll() {
+  //   console.log('window scrolled')
+  //   console.log('parentElement', this.parentElement)
+  //   // if ((this.scrollableContent.scrollHeight - (this.scrollableContent.scrollTop + this.scrollableContent.offsetHeight)) <= 0) this.isScrollAtBottom = true
+  //   // if (this.scrollableContent.scrollTop <= 0) this.isScrollAtBottom = false
+  // }
+
+  @HostListener('scroll', ['$event']) onScroll(event: any) {
+    // do tracking
+    // console.log('scrolled', event.target.scrollTop);
+    // Listen to click events in the component
+    let tracker = event.target;
+
+    let limit = tracker.scrollHeight - tracker.clientHeight;
+    console.log(event.target.scrollTop, limit);
+    if (event.target.scrollTop === limit) {
+      alert('end reached');
+    }
   }
 
-  constructor(private readonly _viewportScroller: ViewportScroller, private el: ElementRef) { }
+  constructor(private readonly _viewportScroller: ViewportScroller, private el: ElementRef, private elRef: ElementRef) { }
+
+  ngAfterViewInit(): void {
+    const element = this.elRef.nativeElement as HTMLElement
+    const scrollableParents = this.findScrollableParents(element)
+
+    console.log('Scrollbare Eltern:', scrollableParents)
+    console.log('Type Scrollbare Eltern:', typeof(scrollableParents[0]))
+  }
   
   ngOnInit(): void {
     this.documentHeight = document.documentElement.scrollHeight
@@ -71,6 +92,16 @@ export class NgxScrollIndicatorComponent {
     console.log('parentElement scrollheight', this.parentElement.scrollHeight)
 
     this.checkScrollableContent()
+
+
+
+    // this.parentElement.addEventListener("scroll", (event: any) => {
+    //   // output.textContent = "Scroll event fired!";
+    //   setTimeout(() => {
+    //     // console.log('scroll event fired', this.parentElement.scrollTop);
+    //     // output.textContent = "Waiting on scroll events...";
+    //   }, 1000);
+    // });
   }
 
   // @HostListener('window:scroll', ['$event']) onWindowScroll(event: any) {
@@ -107,6 +138,8 @@ export class NgxScrollIndicatorComponent {
 
   checkScrollableContent() {
     console.log('checkScrollableContent', this.scrollableContent)
+
+
     setTimeout(() => {
       if (this.scrollableContent.scrollHeight > this.scrollableContent.offsetHeight) {
         // this.isScrollIndicatorShown = true
@@ -124,4 +157,26 @@ export class NgxScrollIndicatorComponent {
   //   })
   //   this.isScrollAtBottom = false
   // }
+
+  findScrollableParents(element: HTMLElement): HTMLElement[] {
+    const scrollables: HTMLElement[] = []
+    let current: HTMLElement | null = element
+
+    while (current) {
+      const hasScrollableContent = current.scrollHeight > current.clientHeight || current.scrollWidth > current.clientWidth
+
+      const overflowY = window.getComputedStyle(current).overflowY
+      const overflowX = window.getComputedStyle(current).overflowX
+      const isScrollableY = overflowY === 'auto' || overflowY === 'scroll'
+      const isScrollableX = overflowX === 'auto' || overflowX === 'scroll'
+
+      if ((hasScrollableContent && (isScrollableY || isScrollableX))) {
+        scrollables.push(current)
+      }
+
+      current = current.parentElement
+    }
+
+    return scrollables
+  }
 }

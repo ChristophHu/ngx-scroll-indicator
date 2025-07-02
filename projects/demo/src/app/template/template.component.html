@@ -1,14 +1,22 @@
-<ngx-scroll-indicator [distanceToTop]="300" [scrollableContent]="scrollableContent"></ngx-scroll-indicator>
+<div class="absolute inset-0">
+  <div class="absolute inset-0 z-10">
+    <div class="relative container mx-auto" #scrollableContent>
+      <div class="h-96 bg-gray-100 text-white" sectionName="first" id="1">
+        <!-- <button class="p-2 bg-blue-400 rounded cursor-pointer">Test</button> -->
+      </div>
+      <div class="h-96" #section id="2"></div>
+      <div class="h-96 bg-gray-100 text-white" #section id="3"></div>
+      <div class="h-96" #section id="4"></div>
+      <div class="h-96 bg-gray-100 text-white" #section id="5"></div>
 
-<div class="absolute inset-0 z-10">
-  <div class="relative container mx-auto" #scrollableContent>
-    <div class="h-96 bg-gray-100 text-white" sectionName="first" id="1">
-      <!-- <button class="p-2 bg-blue-400 rounded cursor-pointer">Test</button> -->
     </div>
-    <div class="h-96" #section id="2"></div>
-    <div class="h-96 bg-gray-100 text-white" #section id="3"></div>
-    <div class="h-96" #section id="4"></div>
-    <div class="h-96 bg-gray-100 text-white" #section id="5"></div>
-    
+  </div>
+
+</div>
+<div class="absolute bottom-0">
+  <div class="fixed bottom-0 z-20">
+    <!-- <div class="h-12 w-12 bg-yellow-200"></div> -->
+    <ngx-scroll-indicator [distanceToTop]="300" [scrollableContent]="scrollableContent"></ngx-scroll-indicator>
   </div>
 </div>
+
